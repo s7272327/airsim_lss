@@ -15,8 +15,9 @@ DroneState = namedtuple("DroneState", ["timestamp", "x", "y", "z", "qx", "qy", "
 
 #################这里记录数据集中的场景##################
 #"downtown_west_1"
+#"dwontown_west_2"
 
-scene_name = "downtown_west_1"
+scene_name = "downtown_west_2"
 
 #加载数据
 with open(f"drones_states_{scene_name}.pkl", "rb") as f:
@@ -57,10 +58,10 @@ def capture_video(parent_folder,folder_list,client, drone_list):
             )
         # 获取压缩的PNG图像
         responses = client.simGetImages([
-            airsim.ImageRequest(0, airsim.ImageType.Scene, False, True),
-            airsim.ImageRequest(1, airsim.ImageType.Scene, False, True),
-            airsim.ImageRequest(2, airsim.ImageType.Scene, False, True),
-            airsim.ImageRequest(4, airsim.ImageType.Scene, False, True),
+            airsim.ImageRequest(0, airsim.ImageType.Scene, False, True),#前
+            airsim.ImageRequest(1, airsim.ImageType.Scene, False, True),#右
+            airsim.ImageRequest(2, airsim.ImageType.Scene, False, True),#左
+            airsim.ImageRequest(4, airsim.ImageType.Scene, False, True),#后
         ], vehicle_name=drone_list[0])
 
         camera_names = ["front", "right", "left", "back"]
@@ -79,10 +80,27 @@ def capture_video(parent_folder,folder_list,client, drone_list):
                 # 将图像保存为JPG文件
                 img.save(image_filename, format="JPEG")
 def main():
+    #读取settings.json
+    settings_path = os.path.expanduser("C:/Users/sxk72/Documents/AirSim/settings.json")  # 改成实际路径
 
-    drone_names = ['Drone0', 'Drone1', 'Drone2', 'Drone3']  # 无人机名称
+    with open(settings_path, "r") as f:
+        cfg = json.load(f)
+
+    vehicles = cfg.get("Vehicles", {})
+    # drone_names 从 JSON 的 key 自动生成,替代原来的
+    # drone_names = ['Drone0', 'Drone1', 'Drone2','Drone3']
+    drone_names = list(vehicles.keys())
+    offsets = {
+        name: (
+            params.get("X", 0.0),
+            params.get("Y", 0.0),
+            params.get("Z", 0.0),
+            params.get("Yaw", 0.0)
+        )
+        for name, params in vehicles.items()
+    }
     folder_list = ['CAM_FRONT', 'CAM_RIGHT', 'CAM_LEFT', 'CAM_BACK']  # 视频存放文件夹
-    parent_folder = "mydataset\mini\samples"
+    parent_folder = "dataset\mydataset\mini\samples"
 
     #根据定格的路线采集图片
     capture_video(parent_folder, folder_list, airsim.MultirotorClient(), drone_names)
@@ -116,8 +134,8 @@ def main():
     sample_data_list = []
     sample_list = []
     camera_names = ["front", "right", "left", "back"]
-    x0 = 1.5
-    y0 = 0
+    drone_name = "Drone0"
+    x0, y0, z0, yaw0 = offsets[drone_name]
     z0 = -0.08 #setting文件里设置的z为0，这里z为airsim实际返回的坐标，应该是无人机中心距离地面的距离
     for index,state in enumerate(drones_states[0]):  # 遍历自身无人机的所有时间戳数据
         mystate_x = state.x + x0
@@ -165,7 +183,7 @@ def main():
             else:
                 time_stamp_next = drones_states[0][index + 1].timestamp
                 next_token = f"sample_data_{my_scene}_{time_stamp_next}_{cam_name}"
-            calibrated_can_token = f"calibrated_sensor_{my_scene}_{cam_name}"
+            calibrated_can_token = f"calibrated_sensor_{cam_name}"
             #生成sample_data(将图像关联到时间戳）
             sample_data_list.append({
                 "token": data_token,
@@ -182,6 +200,9 @@ def main():
                 "next": next_token
             })
 
+    with open(f"dataset/scene/scene_{my_scene}.json", "w") as f:
+        json.dump(scene_list, f, indent=4)
+
     with open(f"dataset/sample_data/sample_data_{my_scene}.json", "w") as f:
         json.dump(sample_data_list, f, indent=4)
 
@@ -196,7 +217,7 @@ def main():
     instance = []
 
     # 为每架无人机创建 instance_token
-    num_drones = 3  # 4 架其他无人机
+    num_drones = len(drone_names) - 1 # 其他无人机
     instance_tokens = [str(uuid.uuid4()) for _ in range(num_drones)]
     for drone_idx, drone_states in enumerate(drones_states[1:]):
         prev_token = ""  # 初始化 prev_token
@@ -211,18 +232,9 @@ def main():
         # 注意这里idx虽然是从0开始，但遍历的是drones_states[1:]，但0对应原来的1号机
         #这里将droneidx恢复为原始编号
         drone_idx_a = drone_idx + 1
-        if drone_idx_a == 1:
-            x0 = 2
-            y0 = -0.25
-        elif drone_idx_a == 2:
-            x0 = 1.5
-            y0 = 0.5
-        elif drone_idx_a == 3:
-            x0 = 1
-            y0 = -0.5
-        else:
-            x0 = 0
-            y0 = 0
+        drone_name_tmp = f"Drone{drone_idx_a}"
+        x0, y0, z0, yaw0 = offsets[drone_name_tmp]
+
         # 遍历该无人机的所有时间戳
         for timestamp_idx, state in enumerate(drone_states):
             #生成pre_token

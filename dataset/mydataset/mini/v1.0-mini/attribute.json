@@ -1,0 +1,12 @@
+[
+    {
+    "token": "djimavic_moving",
+    "name": "aircraft.moving",
+    "description": "aircraft is moving."
+    },
+    {
+        "token": "djimavic_stopped",
+        "name": "aircraft.stopped",
+        "description": "aircraft stopped."
+    }
+]

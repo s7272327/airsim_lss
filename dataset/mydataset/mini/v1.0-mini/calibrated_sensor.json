@@ -1,0 +1,130 @@
+[
+    {
+        "token": "calibrated_sensor_front",
+        "sensor_token": "front_cam",
+        "translation": [
+            0.115,
+            0,
+            0
+            ],
+        "rotation": [
+            1,
+            0,
+            0,
+            0
+            ],
+        "camera_intrinsic": [
+            [
+            461.88,
+            0.0,
+            0
+            ],
+            [
+            0.0,
+            259.8,
+            0
+            ],
+            [
+            0.0,
+            0.0,
+            1.0
+            ]
+        ]
+    },
+    {
+        "token": "calibrated_sensor_right",
+        "sensor_token": "right_cam",
+        "translation": [
+            0,
+            0.115,
+            0
+            ],
+        "rotation": [
+            0.707107,
+            0,
+            0,
+            0.707107
+            ],
+        "camera_intrinsic": [
+            [
+            461.88,
+            0.0,
+            0
+            ],
+            [
+            0.0,
+            259.8,
+            0
+            ],
+            [
+            0.0,
+            0.0,
+            1.0
+            ]
+        ]
+    },
+    {
+        "token": "calibrated_sensor_left",
+        "sensor_token": "left_cam",
+        "translation": [
+            0,
+            -0.115,
+            0
+            ],
+        "rotation": [
+            0.707107,
+            0,
+            0,
+            -0.707107
+            ],
+        "camera_intrinsic": [
+            [
+            461.88,
+            0.0,
+            0
+            ],
+            [
+            0.0,
+            259.8,
+            0
+            ],
+            [
+            0.0,
+            0.0,
+            1.0
+            ]
+        ]
+    },
+    {
+        "token": "calibrated_sensor_back",
+        "sensor_token": "back_cam",
+        "translation": [
+            -0.115,
+            0,
+            0
+            ],
+        "rotation": [
+            0,
+            0,
+            0,
+            1
+            ],
+        "camera_intrinsic": [
+            [
+            461.88,
+            0.0,
+            0
+            ],
+            [
+            0.0,
+            259.8,
+            0
+            ],
+            [
+            0.0,
+            0.0,
+            1.0
+            ]
+        ]
+    }
+]

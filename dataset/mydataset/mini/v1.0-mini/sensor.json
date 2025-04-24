@@ -1,0 +1,22 @@
+[
+    {
+    "token": "front_cam",
+    "channel": "CAM_FRONT",
+    "modality": "camera"
+    },
+    {
+    "token": "left_cam",
+    "channel": "CAM_LEFT",
+    "modality": "camera"
+    },
+    {
+    "token": "right_cam",
+    "channel": "CAM_RIGHT",
+    "modality": "camera"
+    },
+    {
+    "token": "back_cam",
+    "channel": "CAM_BACK",
+    "modality": "camera"
+    }
+]

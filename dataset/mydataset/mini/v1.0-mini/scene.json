@@ -1,0 +1,29 @@
+[
+    {
+        "token": "downtown_west_0",
+        "log_token": "",
+        "nbr_samples": 39,
+        "first_sample_token": "sample_downtown_west_0_1745486477.57921",
+        "last_sample_token": "sample_downtown_west_0_1745486497.129725",
+        "name": "name_downtown_west_0",
+        "description": ""
+    },
+    {
+        "token": "downtown_west_1",
+        "log_token": "",
+        "nbr_samples": 39,
+        "first_sample_token": "sample_downtown_west_1_1745487430.4028194",
+        "last_sample_token": "sample_downtown_west_1_1745487449.937666",
+        "name": "name_downtown_west_1",
+        "description": ""
+    },
+    {
+        "token": "downtown_west_2",
+        "log_token": "",
+        "nbr_samples": 40,
+        "first_sample_token": "sample_downtown_west_2_1745487888.626053",
+        "last_sample_token": "sample_downtown_west_2_1745487908.5888574",
+        "name": "name_downtown_west_2",
+        "description": ""
+    }
+]

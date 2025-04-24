@@ -1,0 +1,23 @@
+[
+    {
+        "token": "02363e3b-ce4a-4246-b2b2-a6fc9e76c628",
+        "category_token": "dji_mavic",
+        "nbr_annotations": 40,
+        "first_annotation_token": "ae7e9c84-98fc-4849-a8c3-8aa731dc4970",
+        "last_annotation_token": "87289c73-e8b7-4920-830f-9df4310d533e"
+    },
+    {
+        "token": "2c895dd2-4cf2-4da3-ad90-fdaa6b7b9854",
+        "category_token": "dji_mavic",
+        "nbr_annotations": 40,
+        "first_annotation_token": "763d014f-b1cf-4a76-8823-e94815c4678e",
+        "last_annotation_token": "dcd89095-80a1-46a7-a0aa-c5591e8d3ba5"
+    },
+    {
+        "token": "008a0432-7af8-4f49-92d5-ed747417fffc",
+        "category_token": "dji_mavic",
+        "nbr_annotations": 40,
+        "first_annotation_token": "9f9577fb-8892-43d4-b2ce-103a09095396",
+        "last_annotation_token": "a1481184-d0a3-4cfd-96a8-5200bef77cff"
+    }
+]
